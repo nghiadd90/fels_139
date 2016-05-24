@@ -1,0 +1,17 @@
+{
+  "name": "fels_139",
+  "homepage": "https://github.com/nghiadd90/fels_139",
+  "authors": [
+    "Framgia"
+  ],
+  "description": "manage css & js components",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
