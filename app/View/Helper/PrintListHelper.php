@@ -22,9 +22,14 @@ class PrintListHelper extends AppHelper
         [
             'confirm' => __('Are you sure?')
         ]);
+        $viewLink = $this->Html->link($model['User']['username'], [
+            'controller' => 'users', 
+            'action' => 'view',
+            $model['User']['id']
+        ]);
         
         return $this->Html->tableCells([
-            [$model['User']['id'], $model['User']['username'], $editLink, $deleteLink]
+            [$model['User']['id'], $viewLink, $editLink, $deleteLink]
         ]);
     }
 }

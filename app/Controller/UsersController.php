@@ -71,8 +71,49 @@ class UsersController extends AppController
 
     public function index()
     {
+        $this->User->recursive = 0;
         $this->Paginator->settings = $this->paginate;
         $data = $this->Paginator->paginate('User');
         $this->set('data', $data);
+    }
+
+    public function delete($id = null)
+    {
+        $this->request->onlyAllow('post', 'delete');
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('User does not exist!'));            
+        }
+        if ($this->User->delete()) {
+            $this->Session->setFlash(__('User has been deteled'));
+
+            return $this->redirect('/users/index');
+        }
+        $this->Session->setFlash(__('There something wrong, User can not delete'));
+
+        return $this->redirect('/users/index');
+    }
+
+    public function edit($id = null)
+    {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid url'));
+        }
+        $user = $this->User->findById($id);
+        if (!$user) {
+            throw new NotFoundException(__('User not exist'));
+        }
+        if ($this->request->is('post', 'put')) {
+            $this->User->id = $id;
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('User has been saved'));
+                
+                return $this->redirect('/users/index');
+            }
+            $this->Session->setFlash(__('Can not update user info'));
+        }
+        if (!$this->request->data) {
+            $this->request->data = $user;
+        }
     }
 }
