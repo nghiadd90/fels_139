@@ -34,4 +34,28 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller
 {
     public $viewClass = 'SmartyView.Smarty';
+
+    public $components = [
+        'Session',
+        'Auth' => [
+            'loginRedirect' => [
+                'controller' => 'pages',
+                'action' => 'display'
+            ], 
+            'logoutRedirect' => [
+                'controller' => 'pages',
+                'action' => 'display'
+            ],
+            'authenticate' => [
+                'Form' => [
+                    'passwordHasher' => 'Blowfish'
+                ]
+            ]
+        ]
+    ];
+
+    public function beforeFilter()
+    {
+        $this->Auth->allow();
+    }
 }
