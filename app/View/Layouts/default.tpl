@@ -1,4 +1,4 @@
-<?php
+{*
 /**
  *
  * PHP 5
@@ -16,7 +16,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-?>
+*}
 {$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework')}
 
 <!DOCTYPE html>
@@ -29,40 +29,60 @@
     </title>
     {$this->Html->meta('icon')}
 
-    {$this->Html->css('cake.generic')}
+    {$this->Html->css('/template/bootstrap/dist/css/bootstrap.min.css')}
+    {$this->Html->css('/template/font-awesome/css/font-awesome.min.css')}
+
+    {$this->Html->css('main.css')}
 
     {$this->fetch('meta')}
     {$this->fetch('css')}
     {$this->fetch('script')}
 </head>
 <body>
-    <div id="container">
-        <div id="header">
-            <h1>{$this->Html->link($cakeDescription, 'http://cakephp.org')}</h1>
-        </div>
-        <div id="content">
+    <nav id="header" class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <bufelson type="bufelson" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+                    <span class="sr-only">{__('Toggle')}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </bufelson>
+                <a href="#" class="navbar-brand">Framgia ELS</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="nav navbar-nav">
+                    <li>{$this->Html->link(__('Home'), ['controller' => 'categories', 'action' => 'index'])}</li>
+                    <li>{$this->Html->link(__('Category'), ['controller' => 'categories', 'action' => 'index'])}</li>
+                    <li>{$this->Html->link(__('Word'), ['controller' => 'words', 'action' => 'index'])}</li>
+                    <li>{$this->Html->link(__('Lesson'), ['controller' => 'lessons', 'action' => 'index'])}</li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li>{$this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'])}</li>
+                    <li>{$this->Html->link(__('Register'), ['controller' => 'users', 'action' => 'register'])}</li>
+                    <li>{$this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'])}</li>
+                </ul>
+            </div>
 
+        </div>
+    </nav><!-- End Header Navigation -->
+
+    <!-- Main Content -->
+    <div id="content">
+        <div class="fels-flash">
             {$this->Session->flash()}
+        </div>
+        {$this->fetch('content')}
 
-            {$this->fetch('content')}
-        </div>
-        <div id="footer">
-            {$this->Html->link(
-                $this->Html->image(
-                    'cake.power.gif',
-                    [
-                        'alt' => $cakeDescription,
-                        'border' => '0'
-                    ]
-                ),
-                'http://www.cakephp.org/',
-                [
-                    'target' => '_blank',
-                    'escape' => false
-                ]
-            )}
-        </div>
-    </div>
-    {$this->element('sql_dump')}
+    </div><!-- End main content -->
+
+    <!-- Show sql dump -->
+    <div class="container">
+        {$this->element('sql_dump')}
+    </div><!-- End show sql dump -->
+
+    {$this->Html->script('/template/jquery/dist/jquery.min.js')}
+    {$this->Html->script('/template/bootstrap/dist/js/bootstrap.min.js')}
+    {$this->Html->script('main.js')}
 </body>
 </html>

@@ -1,0 +1,226 @@
+/* Font import */
+@font-face {
+  font-family: 'Dancing Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Dancing Script'), local('DancingScript'), url(http://fonts.gstatic.com/s/dancingscript/v6/DK0eTGXiZjN6yA8zAEyM2Ud0sm1ffa_JvZxsF_BEwQk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(https://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+
+/* General */
+body {
+    width: 100%;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+
+/*=============================================
+ * HEADER NAVIGATION
+ *=============================================*/
+#header {
+    margin-bottom: 0;
+}
+
+#header .nav li a {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    transition: 0.4s;
+}
+
+#header .nav li a:hover {
+    transition: 0.3s;
+    background-color: #F2F1F1 !important;
+    color: #F47363 !important;
+    transition: 0.4s;
+}
+
+
+.navbar-brand {
+    padding-left: 80px;
+    padding-bottom: 2px !important;
+    padding-right: 5px;
+    font-family: "Dancing Script";
+    font-style: italic;
+    font-size: 20px;
+    color: #EDEDED !important;
+    background-color: #F15B49;
+    transition: 0.4s;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+    background-color: #E65746 !important;
+    transition: 0.4s;
+}
+
+nav.navbar {
+    height: 50px !important;
+    border: none;
+}
+
+
+
+/*=============================================
+ * MAIN CONTENT
+ *=============================================*/
+#content {
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+}
+
+.fels-header {
+    background: #4488BB;
+    width: 100%;
+    /*padding: 100px 0px;*/
+    display: flex;
+    align-items: center;
+    height: 300px;
+}
+
+.fels-header h1 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: 300;
+}
+
+.fels-header p {
+    font-size: 16px;
+    color: white;
+    padding-top: 10px;
+    font-weight: 300;
+}
+
+.fels-add-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.fels-index {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.fels-index .table tr td:nth-child(2) {
+    width: 60%;
+}
+
+.fels-index .table tr td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+}
+
+.fels-index .table tr td:nth-child(3) a {
+    margin: 0 10px;
+}
+
+.fels-index h4 {
+    font-size: 20px;
+}
+
+
+/**
+ * Style for flash message
+ */
+.fels-flash .alert {
+    margin-bottom: 0 !important;
+}
+
+
+/*======================================
+ * FOOTER
+ *======================================*/
+.fels-footer {
+    background: #2D3033;
+    color: #899B9F;
+    font-size: 12px;
+    padding: 40px 0px;
+}
+
+.fels-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fels-footer ul li a {
+    color: #899B9F;
+    font-weight: 700;
+    transition: 0.4s;
+}
+
+.fels-footer ul li a:hover {
+    text-decoration: none;
+    color: #eee;
+    transition: 0.4s;
+}
+
+.fels-footer ul li {
+    margin: 10px 0px;
+}
+
+.fels-footer .fels-social li {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.fels-footer .fels-social li a {
+    background: #899B9F;
+    width: 24px !important;
+    height: 24px !important;
+    display: table-cell;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    transition: 0.4s;
+}
+
+.fels-footer .fels-social li a:hover {
+    opacity: 0.6;
+    transition: 0.4s;
+}
+
+.fels-footer .fels-social i {
+    color: #2D3033;
+}
+
+.fels-footer-border {
+    border-right: 1px solid #B0C7CC;
+}
