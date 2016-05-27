@@ -22,6 +22,6 @@
     </fieldset>
 {$this->Form->end([
     'class' => 'btn btn-primary',
-    'label' =>  __('Update')
+    'label' => __('Update')
 ])}
 </div>

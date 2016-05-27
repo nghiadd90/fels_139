@@ -6,7 +6,7 @@ class User extends AppModel
 {
     public $hasMany = ['Activity', 'Lesson'];
 
-    public $hasAndBelongstoMany = [
+    public $hasAndBelongsToMany = [
         'Follower' => [
             'className' => 'User',
             'joinTable' => 'relationships',
@@ -40,7 +40,7 @@ class User extends AppModel
         ],
         'passwd_confirm' => [
             'require' => [
-                'rule' =>  'notEmpty',
+                'rule' => 'notEmpty',
                 'message' => 'Password confirm required'
             ],
             'match' => [
@@ -48,7 +48,7 @@ class User extends AppModel
                 'message' => 'Password and Password Confirm not match'
             ]
         ],
-        'email' =>  [
+        'email' => [
             'require' => [
                 'rule' => 'notEmpty',
                 'message' => 'Email is required'
@@ -64,7 +64,7 @@ class User extends AppModel
         ]
     ];
 
-    function checkPasswordConfirm($data)
+    public function checkPasswordConfirm($data)
     {
         if ($this->data['User']['password'] != $this->data['User']['passwd_confirm']) {
             return false;
@@ -76,7 +76,7 @@ class User extends AppModel
     public function beforeSave($options = [])
     {
         if (isset($this->data['User']['password'])) {
-            $passwordHasher =  new BlowfishPasswordHasher();
+            $passwordHasher = new BlowfishPasswordHasher();
             $this->data['User']['password'] = $passwordHasher->hash($this->data['User']['password']);
         }
         if (isset($this->data['User']['passwd_confirm'])) {

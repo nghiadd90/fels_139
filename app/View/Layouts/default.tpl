@@ -56,11 +56,15 @@
                     <li>{$this->Html->link(__('Category'), ['controller' => 'categories', 'action' => 'index'])}</li>
                     <li>{$this->Html->link(__('Word'), ['controller' => 'words', 'action' => 'index'])}</li>
                     <li>{$this->Html->link(__('Lesson'), ['controller' => 'lessons', 'action' => 'index'])}</li>
+                    <li>{$this->Html->link(__('User'), ['controller' => 'users', 'action' => 'index'])}</li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
-                    <li>{$this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'])}</li>
-                    <li>{$this->Html->link(__('Register'), ['controller' => 'users', 'action' => 'register'])}</li>
-                    <li>{$this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'])}</li>
+                    {if $this->Session->read('Auth')}
+                        <li>{$this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'])}</li>
+                    {else}                
+                        <li>{$this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'])}</li>
+                        <li>{$this->Html->link(__('Register'), ['controller' => 'users', 'action' => 'register'])}</li>
+                    {/if}
                 </ul>
             </div>
 

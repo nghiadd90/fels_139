@@ -2,7 +2,7 @@
     <table class="table">
         {$this->Html->tableHeaders(['ID', 'User Name', 'Edit Link', 'Delete Link'])}
         {foreach $data as $user}
-            {$this->PrintList->printModel($user)}
+            {$this->PrintList->printModel($user, 'User')}
         {/foreach}
     </table>
     <nav>
