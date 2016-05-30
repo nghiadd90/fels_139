@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property User $User
  * @property PaginatorComponent $Paginator
  */
-class UsersController extends AppController 
+class UsersController extends AppController
 {
     public $components = ['Paginator'];
 
@@ -20,11 +20,12 @@ class UsersController extends AppController
             'User.username' => 'asc'
         ]
     ];
+
     public function beforeFilter()
     {
         parent::beforeFilter();
         $this->Auth->fields = [
-            'username' => 'username', 
+            'username' => 'username',
             'password' => 'password'
         ];
     }
@@ -32,7 +33,6 @@ class UsersController extends AppController
     public function login()
     {
         if ($this->Auth->user('id') != null) {
-
             return $this->redirect('/');
         }
 
@@ -56,7 +56,6 @@ class UsersController extends AppController
     public function register()
     {
         if ($this->Auth->user('id') != null) {
-
             return $this->redirect('/');
         }
 
@@ -113,7 +112,7 @@ class UsersController extends AppController
             $this->User->id = $id;
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('User has been saved'), 'success');
-                
+
                 return $this->redirect('/users/index');
             }
             $this->Session->setFlash(__('Can not update user info'), 'error');
@@ -131,7 +130,7 @@ class UsersController extends AppController
         $this->User->recursive = 2;
         $user = $this->User->find('first', [
             'conditions' => [
-                'User.id' => $id, 
+                'User.id' => $id,
             ]
         ]);
         $wordLearned = $this->LessonWord->find('all', [
@@ -156,7 +155,7 @@ class UsersController extends AppController
         }
         $user = $this->User->find('first', [
             'conditions' => [
-                'User.id' => $id, 
+                'User.id' => $id,
             ]
         ]);
         if (!$user) {
@@ -185,7 +184,7 @@ class UsersController extends AppController
         }
         $user = $this->User->find('first', [
             'conditions' => [
-                'User.id' => $id, 
+                'User.id' => $id,
             ]
         ]);
         if (!$user) {

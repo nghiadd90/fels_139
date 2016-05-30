@@ -5,9 +5,18 @@ class CategoriesController extends AppController
 
     public $helpers = ['Html', 'Form', 'Session'];
 
+    public $uses = ['Category', 'Word', 'WordAnswer', 'Lesson', 'LessonWord', 'User'];
+
     public function index()
     {
-        return $this->set('categories', $this->Paginator->paginate('Category'));
+        $categories = $this->Paginator->paginate('Category');
+        $categoryWords = $this->Category->totalWordsInCategory();
+        $learnedWords = $this->Category->totalLearnedWordsInCategory();
+        $this->set([
+            'categories' => $this->Paginator->paginate('Category'),
+            'categoryWords' => $categoryWords,
+            'learnedWords' => $learnedWords
+        ]);
     }
 
     public function view($id = null)
@@ -20,8 +29,16 @@ class CategoriesController extends AppController
         if (!$category) {
             throw new NotFoundException(__('Invalid category'));
         }
+        $this->Category->Word->recursive = -1;
 
-        return $this->set('category', $category);
+        return $this->set([
+            'category' => $category,
+            'words' => $this->Category->Word->find('all', [
+                'conditions' => [
+                    'Word.category_id' => $id
+                ]
+            ])
+        ]);
     }
 
     public function add()
@@ -86,5 +103,20 @@ class CategoriesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function learn($id = null)
+    {
+        $this->request->onlyAllow('post');
+
+        if (!$this->Category->exists($id)) {
+            throw new NotFoundException(__('Invalid category'));
+        }
+
+        return $this->redirect([
+            'controller' => 'lessons',
+            'action' => 'learn',
+            $id
+        ]);
     }
 }

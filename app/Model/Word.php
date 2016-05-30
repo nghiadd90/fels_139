@@ -11,4 +11,15 @@ class Word extends AppModel
             'message' => 'This field could not be blank'
         ]
     ];
+
+    public function isCorrect($word_id, $word_answer_id)
+    {
+        return $this->WordAnswer->find('count', [
+            'conditions' => [
+                'WordAnswer.correct' => 1,
+                'WordAnswer.word_id' => $word_id,
+                'WordAnswer.id' => $word_answer_id
+            ]
+        ]);
+    }
 }

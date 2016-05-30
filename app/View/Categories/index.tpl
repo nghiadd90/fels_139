@@ -22,50 +22,59 @@
 
         <!-- index content -->
         <div class="fels-index col-sm-12">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>{__('Id')}</th>
-                        <th>{__('Name')}</th>
-                        <th>{__('Action')}</th>
-                        <th>{__('Created')}</th>
-                    </tr>
-                    {assign var="edit_link" value="<i class='fa fa-pencil'></i>  {__('Edit')}"}
-                    {assign var="delete_link" value="<i class='fa fa-trash'></i>  {__('Delete')}"}
-                    {foreach $categories as $category}
-                    <tr>
-                        <td>{$category['Category']['id']}</td>
-                        <td>{$this->Html->link($category['Category']['name'], ['action' => 'view', $category['Category']['id']])}</td>
-                        <td>
-                            {$this->Html->link(
-                                $edit_link,
-                                [
-                                    'action' => 'edit',
-                                    $category['Category']['id']
-                                ],
-                                [
-                                    'class' => 'btn btn-default btn-primary',
-                                    'escape' => false
-                                ]
-                            )}
-                            {$this->Form->postLink(
-                                $delete_link,
-                                [
-                                    'action' => 'delete',
-                                    $category['Category']['id']
-                                ],
-                                [
-                                    'confirm' => __('Are you sure?'),
-                                    'class' => 'btn btn-default btn-danger',
-                                    'escape' => false
-                                ]
-                            )}
-                        </td>
-                        <td>{$category['Category']['created']}</td>
-                    </tr>
-                    {/foreach}
-                </table>
-            </div><!-- end table-responsive -->
-        </div><!-- end index content -->
+            {assign var="edit_link" value="<i class='fa fa-pencil'></i>  {__('Edit')}"}
+            {assign var="delete_link" value="<i class='fa fa-trash'></i>  {__('Delete')}"}
+            {foreach $categories as $category}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>{$category['Category']['id']} - {$this->Html->link($category['Category']['name'], ['action' => 'view', $category['Category']['id']])}
+                    <span>
+                    {__(
+                        'You\'ve learned %d/%d',
+                        $learnedWords[$category['Category']['id']],
+                        $categoryWords[$category['Category']['id']]
+                    )}
+                    </span>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    {$this->Html->link(
+                        $edit_link,
+                        [
+                            'action' => 'edit',
+                            $category['Category']['id']
+                        ],
+                        [
+                            'class' => 'btn btn-default btn-primary',
+                            'escape' => false
+                        ]
+                    )}
+                    {$this->Form->postLink(
+                        $delete_link,
+                        [
+                            'action' => 'delete',
+                            $category['Category']['id']
+                        ],
+                        [
+                            'confirm' => __('Are you sure?'),
+                            'class' => 'btn btn-default btn-danger',
+                            'escape' => false
+                        ]
+                    )}
+                    {$this->Form->postLink(
+                        __('Start'),
+                        [
+                            'action' => 'learn',
+                            $category['Category']['id']
+                        ],
+                        [
+                            'class' => 'btn btn-default btn-primary pull-right',
+                            'escape' => false
+                        ]
+                    )}
+                </div>
+            </div>
+            {/foreach}
+        </div>
     </div>
 </div>

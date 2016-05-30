@@ -39,9 +39,9 @@ class AppController extends Controller
         'Session',
         'Auth' => [
             'loginRedirect' => [
-                'controller' => 'categories',
-                'action' => 'index'
-            ], 
+                'controller' => 'pages',
+                'action' => 'display'
+            ],
             'logoutRedirect' => [
                 'controller' => 'pages',
                 'action' => 'display'
@@ -57,5 +57,6 @@ class AppController extends Controller
     public function beforeFilter()
     {
         $this->Auth->allow();
+        App::import('Model', 'User');
     }
 }

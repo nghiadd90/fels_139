@@ -107,3 +107,6 @@ CakeLog::config('error', array(
     'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
     'file' => 'error',
 ));
+
+
+define('ERROR_MSG', 'Something went wrong. The action cannot be completed.');

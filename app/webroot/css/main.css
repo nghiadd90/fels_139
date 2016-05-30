@@ -155,7 +155,10 @@ nav.navbar {
     font-size: 20px;
 }
 
-
+.fels-index span {
+    font-size: 16px;
+    font-weight: 400;
+}
 /**
  * Style for flash message
  */
