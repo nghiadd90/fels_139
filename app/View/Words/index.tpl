@@ -21,6 +21,46 @@
 
         <!-- index content -->
         <div class="fels-index col-sm-12">
+            <div class="row">
+                {$this->Form->create('Word')}
+                <div class="col-sm-6">
+                {assign var="options" value=[]}
+                {foreach $categories as $key => $value}
+                    {$options[$key] = $value}
+                {/foreach}
+                {$this->Form->select(
+                    'Word.category_id',
+                    $options,
+                    [
+                        'legend' => false,
+                        'empty' => __('All')
+                    ]
+                )}
+                </div>
+                <div class="col-sm-6">
+                {$this->Form->radio(
+                    'filter',
+                    [
+                        'learned' => __('Learned'),
+                        'notlearned' => __('Not learned'),
+                        'all' => __('All')
+                    ],
+                    [
+                        'legend' => false
+                    ]
+                )}
+                </div>
+                {$this->Form->submit(
+                    __('Filter'),
+                    [
+                        'div' => 'form-group',
+                        'before' => '<div class="col-sm-6 col-sm-offset-6">',
+                        'after' => '</div>',
+                        'class' => 'btn btn-default btn-primary'
+                    ]
+                )}
+                {$this->Form->end()}
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <tr>

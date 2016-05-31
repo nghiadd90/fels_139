@@ -1,13 +1,38 @@
 <?php
 class WordsController extends AppController
 {
-    public $components = ['Paginator'];
+    public $components = ['Paginator', 'WordFilter'];
 
     public $helpers = ['Html', 'Form', 'Session'];
 
+    public $uses = ['Word', 'Category'];
+
     public function index()
     {
-        return $this->set('words', $this->Paginator->paginate('Word'));
+        $this->Word->recursive = -1;
+        $this->Category->recursive = -1;
+
+        if ($this->request->is('post')) {
+            if ($this->request->data['Word']['filter'] == null) {
+                $this->request->data['Word']['filter'] = 'all';
+            }
+            $wordListFilter = $this->WordFilter->filterWords(
+                $this->request->data['Word']['category_id'],
+                $this->request->data['Word']['filter']
+            );
+            $this->set([
+                'words' => $wordListFilter,
+                'categories' => $this->Category->find('list')
+            ]);
+        }
+
+        if (!$this->request->data) {
+            $this->set([
+                'words' => $this->Word->find('all'),
+                'categories' => $this->Category->find('list')
+            ]);
+        }
+
     }
 
     public function view($id = null)
