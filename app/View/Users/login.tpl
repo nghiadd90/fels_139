@@ -13,7 +13,7 @@
             'placeholder' => __('Your User Name')
         ])}
         {$this->Form->input('password', [
-            'label' => 'Password',  
+            'label' => 'Password', 
             'class' => 'form-control',
             'placeholder' => __('Your Password')
         ])}
