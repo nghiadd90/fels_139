@@ -1,6 +1,8 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 
 class User extends AppModel
 {
@@ -61,6 +63,12 @@ class User extends AppModel
                 'rule' => 'isUnique',
                 'message' => 'This email has been use'
             ]
+        ],
+        'avatar_image' => [
+            'rule_image' => [
+                'rule' => ['extension', ['jpg', 'png', 'jepg']],
+                'message' => 'This file is not image'
+            ]
         ]
     ];
 
@@ -81,6 +89,23 @@ class User extends AppModel
         }
         if (isset($this->data['User']['passwd_confirm'])) {
             unset($this->data['User']['passwd_confirm']);
+        }
+        if (isset($this->data['User']['avatar_image'])) {
+            $fileUploaded = $this->data['User']['avatar_image']['name'];
+            $extension = pathinfo($fileUploaded, PATHINFO_EXTENSION);
+            $filename = 'img'. DS . 'avatar' . DS . $this->data['User']['id'] . DS . $this->data['User']['id'] . '.' . $extension;
+            if ($extension != '') {
+                $uploadFolder = 'img'. DS . 'avatar' . DS . $this->data['User']['id'];
+                $folder = new Folder($uploadFolder);
+                if (is_null($folder->path)) {
+                    $folder->create($uploadFolder, 0777);
+                } else {
+                    $folder->delete();
+                    $folder->create($uploadFolder, 0777);
+                }
+                move_uploaded_file($this->data['User']['avatar_image']['tmp_name'], $filename);
+                $this->data['User']['avatar'] = DS . APP_DIR . DS . WEBROOT_DIR . DS . $filename;
+            }
         }
 
         return true;

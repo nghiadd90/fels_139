@@ -12,3 +12,4 @@
 /app/Config/database.php
 /vendors/*
 /app/webroot/template/*
+/app/webroot/img/avatar/*
