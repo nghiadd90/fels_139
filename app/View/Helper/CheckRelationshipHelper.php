@@ -32,15 +32,15 @@ class CheckRelationshipHelper extends AppHelper
         ]);
     }
 
-    public function checkActivities($following, $follower)
+    public function checkActivities($following, $follower_id)
     {
-        $temp = $following['Follower'];
-        if ($following['User']['id'] == $follower) {
+        $listFollowers = $following['Follower'];
+        if ($following['User']['id'] == $follower_id) {
 
             return true;
         } else {
-            foreach ($temp as $key => $value) {
-                if ($value['id'] == $follower) {
+            foreach ($listFollowers as $key => $follower) {
+                if ($follower['id'] == $follower_id) {
 
                     return true;
                 }

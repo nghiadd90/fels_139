@@ -4,7 +4,7 @@
             {__('Activities of ')} {$user['User']['username']}
         </div>
         <div class="panel-body">
-            {if $this->CheckRelationship->checkActivities($user, $authUser['id'])}             
+            {if $this->CheckRelationship->checkActivities($user, $authUser['id'])}
                 {foreach $user['Activity'] as $item}
                     <p>{$user['User']['username']} {$this->PrintList->printModel($item, 'Activity')}</p>
                 {/foreach}

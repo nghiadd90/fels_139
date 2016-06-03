@@ -19,7 +19,7 @@
         {$this->Form->input('passwd_confirm', [
             'class' => 'form-control',
             'label' => __('Password Confirm'),
-            'type' =>  'password'
+            'type' => 'password'
         ])}
         {$this->Form->input('email', [
             'type' => 'text', 
@@ -30,11 +30,11 @@
                 'admin' => 'Admin', 
                 'user' => 'User'
             ],
-            'class' => 'form-control'   
+            'class' => 'form-control'
         ])}
     </fieldset>
 {$this->Form->end([
     'class' => 'btn btn-primary',
-    'label' =>  __('Register')
+    'label' => __('Register')
 ])}
 </div>

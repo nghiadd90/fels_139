@@ -52,16 +52,16 @@
             </div>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav">
-                    <li>{$this->Html->link(__('Home'), ['controller' => 'categories', 'action' => 'index'])}</li>
+                    <li>{$this->Html->link(__('Home'), ['controller' => 'pages', 'action' => 'display'])}</li>
                     <li>{$this->Html->link(__('Category'), ['controller' => 'categories', 'action' => 'index'])}</li>
                     <li>{$this->Html->link(__('Word'), ['controller' => 'words', 'action' => 'index'])}</li>
                     <li>{$this->Html->link(__('Lesson'), ['controller' => 'lessons', 'action' => 'index'])}</li>
                     <li>{$this->Html->link(__('User'), ['controller' => 'users', 'action' => 'index'])}</li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
-                    {if $this->Session->read('Auth')}
+                    {if $this->Session->read('Auth.User')}
                         <li>{$this->Html->link(__('Logout'), ['controller' => 'users', 'action' => 'logout'])}</li>
-                    {else}                
+                    {else}
                         <li>{$this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'])}</li>
                         <li>{$this->Html->link(__('Register'), ['controller' => 'users', 'action' => 'register'])}</li>
                     {/if}

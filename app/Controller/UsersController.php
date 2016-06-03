@@ -10,14 +10,14 @@ class UsersController extends AppController
 {
     public $components = ['Paginator'];
 
-    public $uses = ['User', 'LessonWord', 'Word'];
+    public $uses = ['User', 'LessonWord', 'Word', 'Activity'];
 
     public $helpers = ['Paginator', 'PrintList', 'CheckRelationship'];
 
     public $paginate = [
         'limit' => 4,
         'order' => [
-            'User.name' => 'asc'
+            'User.username' => 'asc'
         ]
     ];
     public function beforeFilter()
@@ -40,7 +40,7 @@ class UsersController extends AppController
             if ($this->Auth->login()) {
                 $this->Session->setFlash(__('You have just login'), 'success');
 
-                return $this->redirect('/');
+                return $this->redirect('/categories/index');
             }
             $this->Session->setFlash(__('Invalid user login infomation, pls try again'), 'error');
         }
@@ -101,7 +101,11 @@ class UsersController extends AppController
         if (!$id) {
             throw new NotFoundException(__('Invalid url'));
         }
-        $user = $this->User->findById($id);
+        $user = $this->User->find('first', [ 
+            'conditions' => [
+                'User.id' => $id
+            ]
+        ]);
         if (!$user) {
             throw new NotFoundException(__('User not exist'));
         }
@@ -164,7 +168,8 @@ class UsersController extends AppController
                 'following_id' => $id
             ]
         ];
-        if ($this->User->Follower->Relationship->save($data)) {
+        if ($this->User->Follower->Relationship->save($data) && 
+            $this->Activity->saveActivity($id, $this->Auth->user('id'), 'follow')) {
             $this->Session->setFlash(__('Following success'), 'success');
         } else {
             $this->Session->setFlash(__('There something wrong'), 'error');
@@ -190,13 +195,45 @@ class UsersController extends AppController
             'Relationship.follower_id' => $this->Auth->user('id'),
             'Relationship.following_id' => $id
         ];
-
-        if ($this->User->Follower->Relationship->deleteAll($conditions)) {
+        if ($this->User->Follower->Relationship->deleteAll($conditions) && 
+            $this->Activity->saveActivity($id, $this->Auth->user('id'), 'unfollow')) {
             $this->Session->setFlash(__(' Unfollowing success'), 'success');
         } else {
             $this->Session->setFlash(__('There something wrong'), 'error');
         }
 
         return $this->redirect("/users/view/$id");
+    }
+
+    public function updateProfile($id = null)
+    {
+        if (!$id) {
+            throw new NotFoundException(__('Invalid url'));
+        }
+        $user = $this->User->find('first', [ 
+            'conditions' => [
+                'User.id' => $id
+            ]
+        ]);
+        if (!$user) {
+            throw new NotFoundException(__('User not exist'));
+        }
+        if ($this->request->is('post', 'put')) {
+            $this->User->id = $id;
+            $isNoFileUploaded = ($this->request->data['User']['avatar_image']['error'] 
+                == UPLOAD_ERR_NO_FILE) ? true : false;
+            if ($isNoFileUploaded) {
+                $this->User->validator()->remove('avatar_image');
+            }
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('User has been saved'), 'success');
+                
+                return $this->redirect("/users/updateProfile/$id");
+            }
+            $this->Session->setFlash(__('Can not update user info'), 'error');
+        }
+        if (!$this->request->data) {
+            $this->request->data = $user;
+        }
     }
 }
